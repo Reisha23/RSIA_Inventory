@@ -83,7 +83,7 @@
     <h3 class="text-center">Inventory RSIA</h3>
     <a href="#">Beranda</a>
     <a href="{{ route('barang-masuk') }}">Barang Masuk</a>
-    <a href="#">Barang Keluar</a>
+    <a href="{{ route('barang-keluar') }}">Barang Keluar</a>
 </div>
 
 
