@@ -78,12 +78,14 @@
 </head>
 <body>
     <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-        <h3 class="text-center">Inventory RSIA</h3>
-        <a href="#">Beranda</a>
-        <a href="#">Barang Masuk</a>
-        <a href="#">Barang Keluar</a>
-    </div>
+ <!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <h3 class="text-center">Inventory RSIA</h3>
+    <a href="#">Beranda</a>
+    <a href="{{ route('barang-masuk') }}">Barang Masuk</a>
+    <a href="#">Barang Keluar</a>
+</div>
+
 
     <!-- Konten Utama -->
     <div class="content">
@@ -193,3 +195,4 @@
     </script>
 </body>
 </html>
+
