@@ -33,7 +33,7 @@
                 </tr>
             </tbody>
         </table>
-        <a href="{{ url('/') }}" class="btn btn-primary">Kembali ke Dashboard</a>
+        <a href="{{ url('/home') }}" class="btn btn-primary">Kembali ke Dashboard</a>
     </div>
 </body>
 </html>

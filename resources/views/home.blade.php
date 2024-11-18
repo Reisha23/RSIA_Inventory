@@ -6,6 +6,9 @@
     <title>Dashboard Inventory RSIA</title>
     <!-- Hubungkan Bootstrap dari CDN -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         /* Custom CSS untuk tata letak sidebar dan header */
         body {
@@ -100,7 +103,6 @@
                 Profil
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">Edit Profil</a>
                 <a class="dropdown-item" href="#">Logout</a>
             </div>
         </div>
