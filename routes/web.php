@@ -23,7 +23,7 @@ Route::get('/barang-keluar', function () {
     return view('keluar');
 })->name('barang-keluar');
 Route::get('/login', function () {
-    return view('auth.login');
+    return view('login');
 })->name('login');
 Route::get('/register', function () {
     return view('auth.register');
