@@ -5,6 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barang Masuk</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom Style for Button */
+        .btn-gray {
+            background-color: #6c757d; /* Warna abu-abu untuk tombol */
+            color: white; /* Warna teks putih */
+            border: none; /* Menghilangkan border default */
+            font-size: 1rem; /* Ukuran font tombol */
+            font-weight: 500; /* Berat font */
+            padding: 10px 20px; /* Padding dalam tombol */
+            border-radius: 8px; /* Sudut tombol yang membulat */
+            cursor: pointer; /* Menambahkan pointer saat hover */
+            text-align: center; /* Menyejajarkan teks di tengah */
+            text-decoration: none; /* Menghapus garis bawah */
+            transition: background-color 0.3s; /* Transisi saat hover */
+        }
+
+        .btn-gray:hover {
+            background-color: #5a6268; /* Warna abu-abu lebih gelap saat hover */
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
@@ -33,7 +53,7 @@
                 </tr>
             </tbody>
         </table>
-        <a href="{{ url('/home') }}" class="btn btn-primary">Kembali ke Dashboard</a>
+        <a href="{{ url('/home') }}" class="btn btn-gray">Kembali ke Dashboard</a>
     </div>
 </body>
 </html>
