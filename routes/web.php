@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BarangMasukController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -29,8 +30,7 @@ Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
 
-
-
-
+Route::get('/barang-masuk', [BarangMasukController::class, 'index'])->name('barang-masuk');
+Route::post('/barang-masuk', [BarangMasukController::class, 'store'])->name('barang.store');
 
 require __DIR__.'/auth.php';

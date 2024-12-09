@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barang Keluar</title>
+    <title>Barang Masuk</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Custom Styles */
+        /* Custom Style for Button */
         .btn-gray {
             background-color: #6c757d; /* Warna abu-abu untuk tombol */
             color: white; /* Warna teks putih */
@@ -27,6 +27,7 @@
     </style>
 </head>
 <body>
+
     <div class="container mt-5">
         <h1>Data Barang Keluar</h1>
         <table class="table table-bordered">
@@ -35,7 +36,7 @@
                     <th>#</th>
                     <th>Nama Barang</th>
                     <th>Jumlah</th>
-                    <th>Tanggal Keluar</th>
+                    <th>User</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,17 +44,36 @@
                     <td>1</td>
                     <td>Barang A</td>
                     <td>10</td>
-                    <td>2024-11-16</td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td>2</td>
                     <td>Barang B</td>
-                    <td>5</td>
-                    <td>2024-11-15</td>
+                    <td>20</td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
-        <a href="{{ url('/home') }}" class="btn btn-gray">Kembali ke Dashboard</a>
+
+        <!-- Form Input -->
+        <h2 class="mt-4">Tambah Data Barang Keluar</h2>
+        <form action="/submit_barang_masuk" method="POST">
+            <div class="form-group">
+                <label for="namaBarang">Nama Barang</label>
+                <input type="text" class="form-control" id="namaBarang" name="namaBarang" placeholder="Masukkan Nama Barang" required>
+            </div>
+            <div class="form-group">
+                <label for="jumlahBarang">Jumlah Barang</label>
+                <input type="number" class="form-control" id="jumlahBarang" name="jumlahBarang" placeholder="Masukkan Jumlah Barang" required>
+            </div>
+            <div class="form-group">
+                <label for="namaUser">Nama User</label>
+                <input type="text" class="form-control" id="namaUser" name="namaUser" placeholder="Masukkan Nama User" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <a href="{{ url('/home') }}" class="btn btn-gray mt-4">Kembali ke Dashboard</a>
     </div>
 </body>
 </html>
