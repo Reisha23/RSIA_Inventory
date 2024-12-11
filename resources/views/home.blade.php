@@ -1,200 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Inventory RSIA</title>
-    <!-- Hubungkan Bootstrap dari CDN -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+@extends('layouts.master')
 
-    <style>
-        /* Custom CSS untuk tata letak sidebar dan header */
-        body {
-            display: flex;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        .sidebar {
-            width: 250px;
-            background-color: #343a40;
-            color: white;
-            padding-top: 20px;
-            position: fixed;
-            height: 100%;
-            overflow: auto;
-            transition: width 0.3s;
-        }
-        .sidebar a {
-            display: block;
-            color: white;
-            padding: 10px 15px;
-            text-decoration: none;
-        }
-        .sidebar a:hover {
-            background-color: #495057;
-        }
-        .content {
-            margin-left: 250px;
-            padding: 20px;
-            flex: 1;
-        }
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #ddd;
-        }
-        .search-bar input {
-            padding: 5px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .sidebar-toggle {
-            display: none;
-        }
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 0;
-                transition: width 0.3s;
-            }
-            .sidebar.open {
-                width: 250px;
-            }
-            .sidebar-toggle {
-                display: block;
-                background-color: #343a40;
-                color: white;
-                padding: 10px;
-                cursor: pointer;
-            }
-            .content {
-                margin-left: 0;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Sidebar -->
- <!-- Sidebar -->
-<div class="sidebar" id="sidebar">
-    <h3 class="text-center">Inventory RSIA</h3>
-    <a href="#">Beranda</a>
-    <a href="{{ route('barang-masuk') }}">Barang Masuk</a>
-    <a href="{{ route('barang-keluar') }}">Barang Keluar</a>
+@section('title', 'Dashboard Inventory')
+
+@section('content')
+<div class="container-fluid">
+    <h1>Dashboard Inventory</h1>
+
+    <div class="row">
+        <!-- Kartu Statistik -->
+        <div class="col-md-3">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body">
+                    <h5>Total Supplier</h5>
+                    <h2>{{ $totalSuppliers }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white mb-4">
+                <div class="card-body">
+                    <h5>Total Barang</h5>
+                    <h2>{{ $totalItems }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white mb-4">
+                <div class="card-body">
+                    <h5>Barang Masuk Bulan Ini</h5>
+                    <h2>{{ $totalIncomingItems }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-danger text-white mb-4">
+                <div class="card-body">
+                    <h5>Barang Keluar Bulan Ini</h5>
+                    <h2>{{ $totalOutItems }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Diagram -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Diagram Barang Masuk Tahunan
+                </div>
+                <div class="card-body">
+                    <canvas id="chartBarangMasuk" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Diagram Barang Keluar Tahunan
+                </div>
+                <div class="card-body">
+                    <canvas id="chartBarangKeluar" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+@endsection
 
-
-    <!-- Konten Utama -->
-    <div class="content">
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <div class="sidebar-toggle" onclick="toggleSidebar()">☰</div>
-        <div class="search-bar">
-            <input type="text" placeholder="Cari...">
-        </div>
-        <div class="dropdown">
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Profil
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="#">Logout</a>
-            </div>
-        </div>
-    </div>
-
-        <h1>Total Barang masuk dan keluar</h1>
-        <div class="row">
-            <!-- Card untuk Diagram -->
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        Diagram Barang Masuk
-                    </div>
-                    <div class="card-body">
-                        <canvas id="chartBarangMasuk" width="400" height="200"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        Diagram Barang Keluar
-                    </div>
-                    <div class="card-body">
-                        <canvas id="chartBarangKeluar" width="400" height="200"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Hubungkan JavaScript Bootstrap dan Chart.js dari CDN -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- Script untuk Sidebar Responsif -->
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('open');
+@push('scripts')
+<script>
+    // Data untuk grafik barang masuk
+    var ctx1 = document.getElementById('chartBarangMasuk').getContext('2d');
+    var chartBarangMasuk = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: @json($incomingItemsChart['labels']),
+            datasets: [{
+                label: 'Barang Masuk',
+                data: @json($incomingItemsChart['data']),
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
         }
-    </script>
+    });
 
-    <!-- Inisialisasi Chart.js untuk diagram -->
-    <script>
-        var ctxBarangMasuk = document.getElementById('chartBarangMasuk').getContext('2d');
-        var chartBarangMasuk = new Chart(ctxBarangMasuk, {
-            type: 'bar',
-            data: {
-                labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei'],
-                datasets: [{
-                    label: 'Jumlah Barang Masuk',
-                    data: [12, 19, 3, 5, 2],
-                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+    // Data untuk grafik barang keluar
+    var ctx2 = document.getElementById('chartBarangKeluar').getContext('2d');
+    var chartBarangKeluar = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: @json($outItemsChart['labels']),
+            datasets: [{
+                label: 'Barang Keluar',
+                data: @json($outItemsChart['data']),
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
-        });
-
-        var ctxBarangKeluar = document.getElementById('chartBarangKeluar').getContext('2d');
-        var chartBarangKeluar = new Chart(ctxBarangKeluar, {
-            type: 'line',
-            data: {
-                labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei'],
-                datasets: [{
-                    label: 'Jumlah Barang Keluar',
-                    data: [5, 10, 8, 6, 7],
-                    backgroundColor: 'rgba(255, 99, 132, 0.6)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 2,
-                    fill: false
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
-</body>
-</html>
-
+        }
+    });
+</script>
+@endpush

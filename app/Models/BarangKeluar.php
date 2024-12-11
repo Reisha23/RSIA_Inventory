@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BarangMasuk extends Model
+class BarangKeluar extends Model
 {
-    protected $table = 'incoming_item';
-    protected $primaryKey = 'id_incoming';
+    protected $table = 'out_item';
+    protected $primaryKey = 'id_out';
 
     protected $fillable = [
         'users_id_username',
-        'incoming_date',
-        'total_incoming',
+        'out_date',
+        'total_out',
         'item_id_item'
     ];
 
