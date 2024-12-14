@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Dashboard Inventory')
+@section('title', 'Dash RSIA Inventory')
 
 @section('content')
 <div class="container-fluid">

@@ -118,9 +118,6 @@
             <button type="submit" class="btn-primary">Login</button>
 
             <div class="mt-4 text-center">
-                <a href="{{ route('password.request') }}" class="link">Forgot Password?</a>
-            </div>
-            <div class="mt-4 text-center">
                 <p class="text-sm">Don't have an account? <a href="{{ route('register') }}" class="link font-bold">Register</a></p>
             </div>
         </form>
